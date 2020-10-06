@@ -9,7 +9,13 @@ const forecast = (latitude, longitude, callback) => {
         }else if(body.message){
             callback('Weather Error: ' + body.message, undefined)
         }else {
-            callback(undefined, "It is currently " + body.main.temp + " degrees out.")
+            const weatherInfo =
+                body.weather[0].main + ": " + body.weather[0].description + "\r\n" +
+                "Temperature: " + body.main.temp + " degrees \r\n" +
+                "Pressure: " + body.main.pressure + "\r\n" +
+                "Wind Speed: " + body.wind.speed + "\r\n" +
+                "Wind Degree: " + body.wind.deg
+            callback(undefined, weatherInfo)
         }
     })
 }
